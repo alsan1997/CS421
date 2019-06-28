@@ -1,0 +1,5 @@
+code-hs-monad-write-03
+
+Good!
+
+Total score:10/10

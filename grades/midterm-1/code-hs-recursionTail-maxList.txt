@@ -1,0 +1,5 @@
+code-hs-recursionTail-maxList
+
+Good!
+
+Total score:10/10

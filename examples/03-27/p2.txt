@@ -1,0 +1,59 @@
+E ; S → S
+
+E ; S ≡ S
+
+
+* Problem 3:
+
+  < if x > y then m := x else skip fi ; if x < y then m := y else skip fi , {x:=10,y:=30}>
+→ < skip ; if x < y then m := y else skip fi , {x:=10,y:=30}>
+
+** Solution
+  < if x > y then m := x else skip fi ; if x < y then m := y else skip fi , {x:=10,y:=30}>
+→ < skip ; if x < y then m := y else skip fi , {x:=10,y:=30}>
+→ < if x < y then m := y else skip fi , {x:=10,y:=30}>
+→ < m := y , {x:=10,y:=30}>
+→ < E , {x:=10,y:=30,m:=30}>
+
+* Problem 4:
+  < n:=0 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=8}>
+→ < while x > 1 do x := x/2 ; n := n+1 od, { x:=8, n;=0}>
+→ < x := x/2 ; n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=8, n;=0}>
+→ < n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=4, n;=0}>
+→ < while x > 1 do x := x/2 ; n := n+1 od, { x:=4, n;=1}>
+→ < x := x/2 ; n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=4, n;=1}>
+→ < n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=2, n;=1}>
+→ < while x > 1 do x := x/2 ; n := n+1 od, { x:=2, n;=2}>
+→ < x := x/2 ; n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=2, n;=2}>
+→ < n := n+1 ; while x > 1 do x := x/2 ; n := n+1 od, { x:=1, n;=2}>
+→ < while x > 1 do x := x/2 ; n := n+1 od, { x:=1, n;=3}>
+→ < E , { x:=1, n;=3}>
+
+* Problem 5:
+
+Turtles
+
+
+* Problem 6:
+   < when B S, σ> → < S, σ > σ ⊧ B    \models
+   < when B S, σ> → < E, σ > σ ⊧ ¬B
+   < when B S, σ> → < E, σ > σ ⊧ B
+
+   if and only if if and only if
+   < when B S, σ> → < if B then S else skip fi, σ > 
+
+* Problem 7:
+   < do S while B od, σ> → < S ; while B do S od, σ > σ ⊧ B
+   < do S while B od, σ> → < S, σ > , σ ⊧ ¬B
+
+   < do S while B od, σ> →  < S ; while B do S od, σ >
+
+
+* Problem 8.-5
+
+ < x1 · x2 · x3 · s · y1 · y2 · y3> →*  < x · s · y>
+
+* Problem 8
+
+  10 ∘ 5 ∘ 2  →  5 ∘ 2   →  3
+  10 ∘ 5 ∘ 2  →  10 ∘ 3  →  7

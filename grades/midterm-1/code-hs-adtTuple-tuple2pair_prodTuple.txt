@@ -1,0 +1,5 @@
+code-hs-adtTuple-tuple2pair_prodTuple
+
+Good!
+
+Total score:10/10

@@ -1,0 +1,102 @@
+% stack ghci p1.hs                                             ~/tmp/02-15
+
+Warning: Couldn't find a component for file target /home/mattox/tmp/02-15/p1.hs. This means that the correct ghc options might not be used.
+         Attempting to load the file anyway.
+Configuring GHCi with the following packages:
+GHCi, version 8.2.2: http://www.haskell.org/ghc/  :? for help
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+Loaded GHCi configuration from /run/user/1000/ghci24502/ghci-script
+*Main> :t aplus
+aplus :: (Applicative f, Num b) => f b -> f b -> f b
+*Main> aplus (Just 10) (Just 30)
+Just 40
+*Main> aplus [1,2,3] [4,5]
+[5,6,6,7,7,8]
+*Main> aplus (Just 10) Nothing
+Nothing
+
+Prelude> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+*Main> Sure 10
+10
+*Main> Nope
+
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+*Main> Sure 10 == Sure 30
+False
+*Main> Sure 10 == Sure 10
+True
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+*Main> aplus (Sure 10) (Sure 30)
+Sure 40
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+
+/home/mattox/tmp/02-15/p1.hs:42:3: error:
+    `show' is not a (visible) method of class `Weird'
+   |
+42 |   show (Foo x) = "Foo " ++ show x
+   |   ^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+*Main> Foo 10
+Foo 10
+*Main> Bar 30 40
+Bar 30 40
+*Main> Foo (Sure 30)
+Foo Sure 30
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+
+/home/mattox/tmp/02-15/p1.hs:46:13: error:
+    * Expecting one more argument to `Weird'
+      Expected a type, but `Weird' has kind `* -> *'
+    * In the first argument of `Eq', namely `Weird'
+      In the instance declaration for `Eq Weird'
+   |
+46 | instance Eq Weird where
+   |             ^^^^^
+Failed, no modules loaded.
+Prelude> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p1.hs, interpreted )
+Ok, one module loaded.
+*Main> :info Couldbe
+data Couldbe a = Sure a | Nope
+        -- Defined at /home/mattox/tmp/02-15/p1.hs:15:1
+instance [safe] Show a => Show (Couldbe a)
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:18:10
+instance [safe] Eq a => Eq (Couldbe a)
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:22:10
+instance [safe] Functor Couldbe
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:27:10
+instance [safe] Applicative Couldbe
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:31:10
+*Main> :k Couldbe
+Couldbe :: * -> *
+*Main> :info Applicative
+class Functor f => Applicative (f :: * -> *) where
+  pure :: a -> f a
+  (<*>) :: f (a -> b) -> f a -> f b
+  GHC.Base.liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+  (*>) :: f a -> f b -> f b
+  (<*) :: f a -> f b -> f a
+  {-# MINIMAL pure, ((<*>) | liftA2) #-}
+        -- Defined in `GHC.Base'
+instance [safe] Applicative Quux
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:6:10
+instance [safe] Applicative Couldbe
+  -- Defined at /home/mattox/tmp/02-15/p1.hs:31:10
+instance Applicative (Either e) -- Defined in `Data.Either'
+instance Applicative [] -- Defined in `GHC.Base'
+instance Applicative Maybe -- Defined in `GHC.Base'
+instance Applicative IO -- Defined in `GHC.Base'
+instance Applicative ((->) a) -- Defined in `GHC.Base'
+instance Monoid a => Applicative ((,) a) -- Defined in `GHC.Base'

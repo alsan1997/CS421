@@ -1,0 +1,1 @@
+maxList (x:xs) = foldr(\x y-> if x > y then x else y) 0 (x:xs)

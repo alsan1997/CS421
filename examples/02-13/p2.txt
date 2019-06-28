@@ -1,0 +1,68 @@
+-> % stack ghci p2.hs                                             ~/tmp/02-13
+
+Warning: Couldn't find a component for file target /home/mattox/tmp/02-13/p2.hs. This means that the correct ghc options might not be used.
+         Attempting to load the file anyway.
+Configuring GHCi with the following packages:
+GHCi, version 8.2.2: http://www.haskell.org/ghc/  :? for help
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-13/p2.hs, interpreted )
+Ok, one module loaded.
+Loaded GHCi configuration from /run/user/1000/ghci31383/ghci-script
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-13/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> :t sumList
+sumList :: Num t => [t] -> (t -> p) -> p
+*Main> :t fact
+fact   fact'
+*Main> :t fact'
+fact' :: (Eq t, Num t) => t -> (t -> p) -> p
+*Main> :t fact
+fact :: (Eq p, Num p) => p -> p
+*Main> :t fact'
+fact' :: (Eq t, Num t) => t -> (t -> p) -> p
+*Main> sumList [2,3,4,5] id
+14
+*Main> sumList [2,3,4,5] show
+"14"
+*Main> sumList [2,3,4,5] fact
+87178291200
+*Main> sumList [2,3,4,5] (\v -> fact' v (\v2 -> fact' v2 id))
+^CInterrupted.
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-13/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> map'' fact' [2,3,4] id
+[2,6,24]
+*Main> map'' fact' [2,3,4] reverse
+[24,6,2]
+*Main> map'' fact' [2,3,4] sumList id
+32
+*Main> map'' fact' [2,3,4] sumList fact' id
+263130836933693530167218012160000000
+*Main> (((map'' fact' [2,3,4]) sumList) fact') id
+263130836933693530167218012160000000
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-13/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> :t map''
+map'' :: (t1 -> (a -> t2) -> t2) -> [t1] -> ([a] -> t2) -> t2
+*Main> :R
+unknown command ':R'
+use :? for help.
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-13/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> :t ifk
+ifk :: ((Bool -> t1) -> t2) -> (t3 -> t1) -> (t3 -> t1) -> t3 -> t2
+*Main> fact' 100 id
+93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+*Main> fact' 100 print
+93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+*Main> :t print
+print :: Show a => a -> IO ()
+*Main> fact' 100 show
+"93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000"
+*Main> fact' 100 (\x -> -x)
+-93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+*Main>
+Leaving GHCi.

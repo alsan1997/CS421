@@ -1,0 +1,41 @@
+Problem 2
+
+φ({(x,y)}) =   {(a,b)}
+φ({(a,x),(y,z)}) ={(a,a),(b,z)}
+φ[x↦z]({(x,y)}) ={(z,b)}
+φ[z↦x]({(a,x),(y,z)}) = {(a,a),(b,x)}
+φ[z↦φ(x)]({(a,x),(y,z)}) = {(a,a),(b,a)}
+φ[z↦x][y↦c]({(a,x),(y,z)}) = {(a,a),(c,x)}
+
+Problem 3
+
+unify({g(α,a) = g(b,β), h(γ,γ) = h(f(α),γ)})
+DC == unify({h(γ,γ) = h(f(α),γ), α=b, a=β})
+DC == unify({α=b, a=β, γ = f(α), γ = γ})
+E == unify({a=β, γ = f(b), γ = γ})[α↦b]
+O == unify({β=a, γ = f(b), γ = γ})[α↦b]
+E == unify({γ = f(b), γ = γ})[α↦b]̱[β↦a]
+E == unify({f(b) = f(b)})[α↦b]̱[β↦a][γ↦f(b)]
+D == unify({})[α↦b]̱[β↦a][γ↦f(b)]
+[α↦b]̱[β↦a][γ↦f(b)]
+
+NOTE: We are using a "hash-map" like semantics.
+Sometimes people use a "function composition" semantics.
+
+
+
+Problem 4
+
+unify({f(α)=f(x), g(α)=g(β), h(γ,x) = h(β,α)})
+DC == unify({g(α)=g(β), h(γ,x) = h(β,α), α = x})
+DC == unify({h(γ,x) = h(β,α), α = x, α=β })
+DC == unify({α = x, α=β, γ = β, x = α })
+E == unify({x=β, γ = β, x = x })[α↦x]
+O == unify({β=x, γ = β, x = x })[α↦x]
+E == unify({γ = x, x = x })[α↦x][β↦x]
+E == unify({x = x })[α↦x][β↦x][γ↦x] 
+D == unify({})[α↦x][β↦x][γ↦x] 
+[α↦x][β↦x][γ↦x] 
+
+
+

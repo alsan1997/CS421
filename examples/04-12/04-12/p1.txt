@@ -1,0 +1,39 @@
+0. G = { id : forall 'a . 'a -> 'a, y : int} |- id y : int  (App) 
+0.0  G |- id : int -> int (Inst)
+0.0.0  G |- id : forall 'a . 'a -> 'a  (Var)
+0.1  G |- y : int (Var)
+
+0. G = { y : int, z : string } |- (\f. (f y, f z)) (\x . x) : (Int, String)  (App)
+0.0 G = { y : int, z : string } |- \f. (f y, f z) : (int -> int) -> (Int, String)  (Abs)
+0.0.0 G = { y : int, z : string, f : int -> int } |- (f y, f z) : (Int, String)  (Pair)
+0.0.0.0 G = { y : int, z : string, f : int -> int } |- f y : Int  (App)
+0.0.0.0.0 G = { y : int, z : string, f : int -> int } |- f : Int -> Int (Var)
+0.0.0.0.1 G = { y : int, z : string, f : int -> int } |- y : Int (Var)
+0.0.0.1 G = { y : int, z : string, f : int -> int } |- f z : String  (App)
+0.0.0.1.0 G = { y : int, z : string, f : int -> int } |- f : Int -> Int (Var)
+0.0.0.1.1 G = { y : int, z : string, f : int -> int } |- y : String (Var)
+0.1 G = { y : int, z : string } |- (\x . x) : 'c -> 'c  (Abs)
+0.1.0 G = { y : int, z : string, x : 'c } |- x : 'c  (Var)
+
+Problem 3
+
+0. {x:Int, y:String} let f = \x.x in (f x, f y) : (Int,String) (Let)
+0.0 {x:Int, y:String} \x.x : forall 'a. 'a -> 'a (Gen)
+0.0.0 {x:Int, y:String} \x.x : 'a -> 'a (Abs)
+0.0.0.0 {x:'a, y:String} x : 'a (Var)
+0.1 {x:Int, y:String, f : forall 'a . 'a -> 'a } }- (f x, f y) : (Int,String) (Pair)
+0.1.0 {x:Int, y:String, f : forall 'a . 'a -> 'a } |- f x : Int (App)
+0.1.0.0 {x:Int, y:String, f : forall 'a . 'a -> 'a } |- f : Int -> Int  (Inst)
+0.1.0.0.0 {x:Int, y:String, f : forall 'a . 'a -> 'a } |- f : forall 'a . 'a -> 'a  (Var)
+0.1.0.1 G' |- x : Int (Var)
+0.1.1 {x:Int, y:String, f : forall 'a . 'a -> 'a } f y : String (App)
+0.1.1.0 {x:Int, y:String, f : forall 'a . 'a -> 'a } |- f : String -> String  (Inst)
+0.1.1.1 G' |- y : String (Var)
+0.1.1.1.0 {x:Int, y:String, f : forall 'a . 'a -> 'a } |- f : forall 'a . 'a -> 'a  (Var)
+
+   G |- e1 : t1   G |- e2 : t2
+   ---------------------------  (Pair)
+       G |- (e1,e2) : (t1,t2)
+
+
+

@@ -1,0 +1,5 @@
+code-hs-hofUse-maxList
+
+Does not handle lists with all elements less than your initial value.(-3points)
+
+Total score:7/10

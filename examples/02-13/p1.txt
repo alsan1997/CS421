@@ -1,0 +1,8 @@
+*Main> :t map''
+map'' :: (t1 -> (a -> t2) -> t2) -> [t1] -> ([a] -> t2) -> t2
+*Main> map'' fact' [1,2,3,4] id
+[1,2,6,24]
+*Main> map'' fact' [1,2,3,4] reverse
+[24,6,2,1]
+*Main> map''  (map'' fact' )  [[1,2],[4,5]] id
+[[1,2],[24,120]]

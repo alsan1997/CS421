@@ -1,0 +1,68 @@
+% stack ghci p2.hs                                             ~/tmp/02-15
+
+Warning: Couldn't find a component for file target /home/mattox/tmp/02-15/p2.hs. This means that the correct ghc options might not be used.
+         Attempting to load the file anyway.
+Configuring GHCi with the following packages:
+GHCi, version 8.2.2: http://www.haskell.org/ghc/  :? for help
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+Loaded GHCi configuration from /run/user/1000/ghci6624/ghci-script
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> finc (Foo 10)
+Foo 11
+*Main> :t finc
+finc :: (Functor f, Num b) => f b -> f b
+*Main> finc [2,3,4]
+[3,4,5]
+*Main> finc (Just 3300)
+Just 3301
+*Main> :t (+)
+(+) :: Num a => a -> a -> a
+*Main> 10 + 30
+40
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> aplus (Just 20) (Just 4)
+Just 24
+*Main> aplus (Foo 20) (Foo 4)
+Foo 24
+Prelude> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> aplus (Foo 20) 30 (Foo 4)
+Foo 54
+*Main> aplus [20] 49 [1,2,3]
+[70,71,72]
+*Main> aplus [20,10] 49 [1,2,3]
+[70,71,72,60,61,62]
+*Main> aplus [10,20] 49 [1,2,3]
+[60,61,62,70,71,72]
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> aplus (Sure 30) 30 (Sure 40)
+Sure 100
+*Main> finc (Sure 40)
+Sure 41
+*Main> :t not
+not :: Bool -> Bool
+*Main> fmap not (Sure True)
+Sure False
+Prelude> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> finc (Foo 10)
+Foo 11
+*Main> finc (Bar 10 20)
+Bar 11 21
+*Main> :r
+[1 of 1] Compiling Main             ( /home/mattox/tmp/02-15/p2.hs, interpreted )
+Ok, one module loaded.
+*Main> aplus (Foo 33) 99 (Bar 3 2)
+Bar 135 134
